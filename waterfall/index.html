@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    .container {
+      position: relative;
+      margin: auto;
+      width: 1200px;
+      font-size: 0;
+    }
+    .box {
+      display: inline-block;
+      padding: 10px 15px;
+      box-sizing: border-box;
+      vertical-align: top;
+    }
+    img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+
+  </div>
+
+  <script src="./waterfall.js"></script>
+  <script>
+    let container = document.getElementById('container');
+    var abc = new Waterfall(container, 5);
+
+    // let arr = ['./1.jpg', './2.jpg']
+    let arr = []
+    for (var i = 0; i <= 11; i++) {
+      i < 10 && (i = `0${i}`)
+      arr.push(`./images/P_0${i}.jpg`)
+    }
+
+    function append () {
+      abc.append(arr)
+    }
+    append()
+    window.abc = abc;
+    window.append = append;
+  </script>
+</body>
+</html>
