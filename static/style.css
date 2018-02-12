@@ -1,0 +1,23 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+header {
+  height: 60px;
+  background-color: #eee;
+}
+main {
+  height: calc(100% - 60px);
+  overflow: auto;
+}
+nav {
+  position: fixed;
+  width: 300px;
+  background: #ccc;
+  bottom: 0;
+  top: 60px;
+}
+#coding-container {
+  margin-left: 300px;
+}

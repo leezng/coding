@@ -1,0 +1,21 @@
+{
+  "name": "coding",
+  "version": "1.0.0",
+  "main": "main.js",
+  "repository": "git@github.com:leezng/coding.git",
+  "author": "leezng <leezng@outlook.com>",
+  "license": "MIT",
+  "scripts": {
+    "server": "http-server ./example-dist -p8000",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "copy-webpack-plugin": "^4.4.1",
+    "html-webpack-plugin": "^2.30.1",
+    "http-server": "^0.11.1",
+    "webpack": "^3.10.0"
+  }
+}
