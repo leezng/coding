@@ -2,10 +2,28 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family: "Monaco", "Menlo", "Consolas", "Bitstream Vera Sans Mono";
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+  padding-left: 30px;
+}
+li {
+  line-height: 30px;
+}
+li a {
+  display: block;
+  line-height: inherit;
 }
 header {
+  padding: 0 20px;
   height: 60px;
+  line-height: 60px;
   background-color: #eee;
+  font-size: 24px;
 }
 main {
   height: calc(100% - 60px);
