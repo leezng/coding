@@ -19,7 +19,11 @@ export class Waterfall extends EventEmitter {
     this.gridWidth = this.container.offsetWidth / this.grid;
     this.heightArr = []; // 保存当前所有列的高度
     this.gutter = gutter;
-    this.container.style.position = 'relative';
+    this.containerInit();
+  }
+
+  containerInit () {
+    this.container.style = 'position: relative; height: 100%; overflow: auto';
   }
 
   /**
