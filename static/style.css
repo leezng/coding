@@ -27,7 +27,7 @@ header {
 }
 main {
   height: calc(100% - 60px);
-  overflow: auto;
+  overflow: hidden;
 }
 nav {
   position: fixed;
