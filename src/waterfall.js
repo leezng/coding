@@ -24,6 +24,13 @@ export class Waterfall extends EventEmitter {
 
   containerInit () {
     this.container.style = 'position: relative; height: 100%; overflow: auto';
+    // 监听是否滚动到底, 若是则触发load事件
+    this.container.addEventListener('scroll', ()=> {
+      if (this._timer) clearTimeout(this._timer)
+      this._timer = setTimeout(() => {
+        this.assertTotallyScrolled() && this.emit('load')
+      }, 300)
+    })
   }
 
   /**
@@ -99,7 +106,7 @@ export class Waterfall extends EventEmitter {
   /**
    * 判断是否到底部(表示需执行加载更多)
    */
-  assertLoadMore () {
-
+  assertTotallyScrolled () {
+    return this.container && (this.container.scrollHeight - this.container.scrollTop === this.container.clientHeight)
   }
 }

@@ -11,7 +11,7 @@ export class EventEmitter {
     }
 
     let handlerList = this._events[event] = this._events[event] || [];
-    if (handlerList.indexOf(handler) !== -1) handlerList.push(handler);
+    if (handlerList.indexOf(handler) === -1) handlerList.push(handler);
   }
 
   emit (event, ...args) {
