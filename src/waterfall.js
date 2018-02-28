@@ -1,3 +1,6 @@
+/**
+ * 瀑布流布局
+ */
 import { EventEmitter } from './eventEmitter'
 
 export class Waterfall extends EventEmitter {
@@ -22,6 +25,9 @@ export class Waterfall extends EventEmitter {
     this.containerInit();
   }
 
+  /**
+   * 初始化 waterfall 容器
+   */
   containerInit () {
     this.container.style = 'position: relative; height: 100%; overflow: auto';
     // 监听是否滚动到底, 若是则触发load事件
@@ -31,6 +37,10 @@ export class Waterfall extends EventEmitter {
         this.assertTotallyScrolled() && this.emit('load')
       }, 300)
     })
+    // 初始化时无图片, 触发load
+    setTimeout(() => {
+      this.emit('load')
+    }, 0)
   }
 
   /**

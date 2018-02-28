@@ -13,12 +13,12 @@ export default {
       pictures.push(`./static/P_0${i}.jpg`);
     }
 
-    function append () {
+    waterfall.on('load', function () {
+      console.log('load')
       waterfall.append(pictures);
-    }
+    })
 
-    append();
-    // window.waterfall = waterfall;
+    window.abc = waterfall;
     // window.append = append;
   }
 }
