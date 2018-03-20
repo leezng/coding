@@ -19,7 +19,7 @@ export class Waterfall extends EventEmitter {
 
     this.container = container;
     this.grid = grid;
-    this.gridWidth = this.container.offsetWidth / this.grid;
+    this.gridWidth = Math.floor(this.container.offsetWidth / this.grid);
     this.heightArr = []; // 保存当前所有列的高度
     this.gutter = gutter;
     this.containerInit();
