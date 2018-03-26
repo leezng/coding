@@ -3,6 +3,9 @@
  */
 import { EventEmitter } from './eventEmitter'
 
+let length = 0
+let counter = 0
+
 export class Waterfall extends EventEmitter {
   /**
    * @param  {HTMLDivElement} container 容器
@@ -14,6 +17,8 @@ export class Waterfall extends EventEmitter {
       throw new Error('grid && gutter must be a number.')
     } else if (!container) {
       throw new Error('container must be defined.')
+    } else if (!container.offsetWidth || !container.offsetHeight) {
+      throw new Error('container needs height and width.')
     }
     super();
 
@@ -29,7 +34,8 @@ export class Waterfall extends EventEmitter {
    * 初始化 waterfall 容器
    */
   containerInit () {
-    this.container.style = 'position: relative; height: 100%; overflow: auto';
+    this.container.style.position = 'relative';
+    this.container.style.overflow = 'auto'; // TODO 横向滚动问题s
     // 监听是否滚动到底, 若是则触发load事件
     this.container.addEventListener('scroll', ()=> {
       if (this._timer) clearTimeout(this._timer)
@@ -48,6 +54,8 @@ export class Waterfall extends EventEmitter {
    * @param  {Array} imgs 图片列表的URL数组
    */
   append (imgs) {
+    if (!Array.isArray(imgs)) throw new Error('argument must be an Array.')
+    length = imgs.length
     imgs.forEach((item, index) => this.createBoxDom(item));
   }
 
@@ -67,6 +75,7 @@ export class Waterfall extends EventEmitter {
 
     this.container.appendChild(box);
     this.increaseHeightArr(image.height + this.gutter, left / this.gridWidth);
+    this.finally();
   }
 
   /**
@@ -93,11 +102,23 @@ export class Waterfall extends EventEmitter {
     box.setAttribute('class', 'box');
     box.appendChild(img);
     img.onload = () => this.onload(box, img);
-    img.onerror = () => {}
+    img.onerror = () => this.finally();
     img.src = src;
     img.style.width = '100%';
     img.style.height = 'auto';
     return box;
+  }
+
+  finally () {
+    counter++;
+    if (counter === length) {
+      console.log('loaded');
+      let maxHeight = Math.max(...this.heightArr);
+      // 第一次加载时如果未占满当前容器, 再次触发load, 直到maxHeight超出容器高度出现滚动条
+      if (this.heightArr.length < this.grid || maxHeight <= this.container.offsetHeight) {
+        this.emit('load');
+      }
+    }
   }
 
   /**

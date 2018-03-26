@@ -1,7 +1,7 @@
 import { Waterfall } from 'src/waterfall'
 
 export default {
-  template: '<div id="container"></div>',
+  template: '<div id="container" style="height: 100%;"></div>',
   created () {
     const waterfall = new Waterfall({
       container: document.getElementById('container'),
